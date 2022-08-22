@@ -4,6 +4,15 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors')
 require("dotenv").config();
+const swaggerUi = require('swagger-ui-express')
+const swaggerJsDoc = require('swagger-jsdoc')
+const apiDocs = require('./docs/apiDocs.json')
+const swaggerSpec = {
+    definition: 
+        apiDocs
+    ,
+    apis: [`${path.join(__dirname, "./routes/*.js")}`]
+}
 
 const indexRouter = require('./routes/index');
 const experiencesRouter = require('./routes/experiences');
@@ -21,6 +30,8 @@ app.use(cors())
 
 app.use('/', indexRouter);
 app.use('/experiences', experiencesRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc(swaggerSpec)))
+
 dbConnection();
 
 module.exports = app;

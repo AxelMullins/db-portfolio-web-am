@@ -1,0 +1,214 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "CV Backend Axel Mullins",
+      "description": "API cv-axelmullins",
+      "contact": {
+        "name": "Axel Mullins",
+        "url": "https://portfolio-axel-mullins.vercel.app/",
+        "email": "axelmullins94@gmail.com"
+      },
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://portfolio-web-am.herokuapp.com/",
+        "description": "Hosting Heroku"
+      },
+      {
+        "url": "http://localhost:8080",
+        "description": "localhost"
+      }
+    ],
+    "tags": [
+      {
+        "name": "experiences",
+        "description": "Maneja la informacion de las experiencias"
+      }
+    ],
+    "paths": {
+      "/experiences/verExperiencias": {
+        "get": {
+          "tags": [
+            "experiences"
+          ],
+          "summary": "Returns a list of experiences.",
+          "responses": {
+            "200": {
+              "description": "(OK) Lista de experiencias"
+            }
+          }
+        }
+      },
+      "/experiences/verExperiencia/{id}": {
+        "get": {
+          "tags": [
+            "experiences"
+          ],
+          "summary": "Gets a experience by ID.",
+          "operationId": "getUserById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Experience ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "(OK) Experiencia por ID"
+            }
+          }
+        }
+      },
+      "/experiences/crearExperiencia": {
+        "post": {
+          "tags": [
+            "experiences"
+          ],
+          "summary": "Returns a list of experiences.",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Experiences"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "(OK) La experiencia se guardo correctamente"
+            }
+          }
+        }
+      },
+      "/experiences/editarExperiencia/{id}": {
+        "put": {
+          "tags": [
+            "experiences"
+          ],
+          "summary": "Edit a experience.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Experience ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExperiencesEdit"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "(OK) La experiencia se edito correctamente"
+            }
+          }
+        }
+      },
+      "/experiences/eliminarExperiencia/{id}": {
+        "delete": {
+          "tags": [
+            "experiences"
+          ],
+          "summary": "Delete a experience.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Experience ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "(OK) Lista de experiencias"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Experiences": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "technologies": {
+              "type": "string"
+            },
+            "company": {
+              "type": "string"
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "imgUrl": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "title",
+            "technologies",
+            "company",
+            "details",
+            "imgUrl",
+            "date"
+          ]
+        },
+        "ExperiencesEdit": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "technologies": {
+              "type": "string"
+            },
+            "company": {
+              "type": "string"
+            },
+            "details": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "imgUrl": {
+              "type": "string"
+            },
+            "date": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
