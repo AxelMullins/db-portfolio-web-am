@@ -1,7 +1,7 @@
 const { Experiencia } = require("../models/experiencias");
 const { validationResult } = require("express-validator");
 
-const controllerExp = {
+const experienceController = {
   crearExperiencia: async (req, res) => {
     try {
       const error = validationResult(req);
@@ -61,4 +61,4 @@ const controllerExp = {
   },
 };
 
-module.exports = controllerExp;
+module.exports = experienceController;

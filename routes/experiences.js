@@ -1,12 +1,12 @@
 const express = require("express");
 const upload = require('../libs/storage')
 const router = express.Router();
-const controllerExp = require("../controller/controllerExp.js");
+const experienceController = require("../controller/experienceController");
 const { validarId } = require("../middleware/validarId");
 const { check } = require("express-validator");
 
-router.get("/verExperiencias", controllerExp.verExperiencias);
-router.get("/verExperiencia/:id", validarId, controllerExp.verExperiencia);
+router.get("/verExperiencias", experienceController.verExperiencias);
+router.get("/verExperiencia/:id", validarId, experienceController.verExperiencia);
 router.post(
   "/crearExperiencia",
   [
@@ -17,10 +17,9 @@ router.post(
     check("imgUrl").not().isEmpty().withMessage("El campo esta vacio"),
     check("date").not().isEmpty().withMessage("El campo esta vacio"),
   ],
-  controllerExp.crearExperiencia
+  experienceController.crearExperiencia
 );
-router.put("/editarExperiencia/:id", validarId, controllerExp.editarExperiencia);
-router.delete("/eliminarExperiencia/:id", validarId, controllerExp.eliminarExperiencia);
-// 
-router.post('/uploadImg', upload.single('imgUrl'), controllerExp.cargarImagen)
+router.put("/editarExperiencia/:id", validarId, experienceController.editarExperiencia);
+router.delete("/eliminarExperiencia/:id", validarId, experienceController.eliminarExperiencia);
+router.post('/uploadImg', upload.single('imgUrl'), experienceController.cargarImagen)
 module.exports = router;
